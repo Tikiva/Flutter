@@ -1,14 +1,18 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+  class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Center(child: Text('¡Hola mundo!')),
+    return const MaterialApp(
+      home: Center(
+        child:  Text('¡Hola mundo!'),
+        )
     );
     // TODO: implement build
     throw UnimplementedError();
