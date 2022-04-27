@@ -10,11 +10,12 @@ void main() {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Center(
         child:  Text('¡Hola mundo!'),
         )
     );
+    // ignore: todo
     // TODO: implement build
-    throw UnimplementedError();
   }
 }
