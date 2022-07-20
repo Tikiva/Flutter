@@ -12,6 +12,20 @@ class _CounterScreenState extends State<CounterScreen> {
   bool get kDebugMode => true;
   int counter=0;
 
+void increase (){
+  counter++;
+  setState(() {});
+}
+
+void decrease (){
+  counter--;
+  setState(() {});
+}
+
+void reset(){
+  counter=0;
+  setState(() {});
+}
   @override
   Widget build(BuildContext context) {
     const TextStyle fontSize30= TextStyle(fontSize: 30);
@@ -33,46 +47,39 @@ class _CounterScreenState extends State<CounterScreen> {
       ),
   
       floatingActionButtonLocation: FloatingActionButtonLocation.miniCenterDocked,
-      floatingActionButton: Row(
-        mainAxisAlignment: MainAxisAlignment.center ,
-        children: [
-          FloatingActionButton(
-            child: const Icon (Icons.exposure_minus_1_outlined),
-            onPressed: (){
-              
-              setState((){counter--;});
-              // if (kDebugMode) {
-              //   print("Hola mundo, $counter");
-              // }
-              
-            }),
-            const SizedBox(width: 20),
-            FloatingActionButton(
-            child: const Icon (Icons.restart_alt_outlined),
-            onPressed: (){
-              counter=0;
-              setState((){});
-              // if (kDebugMode) {
-              //   print("Hola mundo, $counter");
-              // }
-              
-            }),
-            const SizedBox(width: 20),
-            FloatingActionButton(
-            child: const Icon (Icons.exposure_plus_1_outlined),
-            onPressed: (){
-              
-              setState((){counter++;});
-              // if (kDebugMode) {
-              //   print("Hola mundo, $counter");
-              // }
-              
-            }),
-         
-        ],
-      ),
+      floatingActionButton: CustomFloatingActions(increaseFn: increase, decreaseFn: decrease,resetFn: reset,),
 
      );
     
+  }
+}
+
+class CustomFloatingActions extends StatelessWidget {
+ final Function increaseFn;
+ final Function decreaseFn;
+ final Function resetFn;
+  const CustomFloatingActions({
+    Key? key, required this.increaseFn, required this.decreaseFn, required this.resetFn,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly ,
+      children: [
+        FloatingActionButton(
+          child:  const Icon (Icons.exposure_minus_1_outlined),
+          onPressed: () =>decreaseFn(),), //()=>setState(()=>counter--)),
+          //const SizedBox(width: 20),
+          FloatingActionButton(
+          child:  const Icon (Icons.restart_alt_outlined),
+          onPressed: ()=>resetFn(),), //()=> setState(() => counter=0)),
+          //const SizedBox(width: 20),
+          FloatingActionButton(
+          child:  const Icon (Icons.exposure_plus_1_outlined),
+          onPressed: ()=>increaseFn(),),//()=> setState(()=>counter++)),
+    
+      ],
+    );
   }
 }
